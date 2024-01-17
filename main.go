@@ -95,7 +95,7 @@ func main() {
 	r.GET("/domain", getDomain)
 	r.GET("/load-capability", getLoad)
 
-	port := ":8080"
+	port := ":80"
 	fmt.Printf("Server is listening on port %s...\n", port)
 	r.Run(port)
 }
