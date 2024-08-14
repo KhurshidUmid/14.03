@@ -42,6 +42,13 @@ func message(c *gin.Context) {
 	c.JSON(200, message)
 }
 
+func getHealth(c *gin.Context) {
+	message := Message{
+		health: "true",
+	}
+	c.JSON(200, message)
+}
+
 func getConfig(c *gin.Context) {
 
 	logLevel := getEnvVariable("LOG_LEVEL")
@@ -94,6 +101,7 @@ func main() {
 	r.GET("/config", getConfig)
 	r.GET("/domain", getDomain)
 	r.GET("/load-capability", getLoad)
+	r.GET("/health", getHealth)
 
 	port := ":80"
 	fmt.Printf("Server is listening on port %s...\n", port)
