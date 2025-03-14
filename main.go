@@ -44,7 +44,7 @@ func message(c *gin.Context) {
 
 func getHealth(c *gin.Context) {
 	message := Message{
-		health: "true",
+		Msg: "true",
 	}
 	c.JSON(200, message)
 }
