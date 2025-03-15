@@ -18,7 +18,7 @@ spec:
         app: frontend-app
     spec:
       containers:
-      - image: nvrbckdown/some1hing
-        name: some1hing
+      - image: nvrbckdown/something
+        name: something
         resources: {}
 status: {}

@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-12
+  labels:
+    app: my-app-12
+spec:
+  replicas: 3 
+  selector:
+    matchLabels:
+      app: my-app-12
+  template:
+    metadata:
+      labels:
+        app: my-app-12
+    spec:
+      containers:
+      - name: my-app-12-container
+        image: podman96/docker-go:v1
+#        image: khurshidumid/app-14:v1
+        resources:
+          limits:
+            cpu: 200m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
+        env:
+        - name: ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: info
+              key: ENVIRONMENT
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: info
+              key: LOG_LEVEL
+        - name: DB_URI
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: DB_URI
+        - name: GRPC_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: info
+              key: GRPC_PORT
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: CPU
+          valueFrom:
+            resourceFieldRef:
+              containerName: my-app-12-container
+              resource: requests.cpu
+        - name: MEMORY
+          valueFrom:
+            resourceFieldRef:
+              containerName: my-app-12-container
+              resource: requests.memory
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-12-service
+spec:
+  selector:
+    app: my-app-12  # Ensure this matches your Deployment labels
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80         # Service port
+      targetPort: 80 # Container port (update as per your app)
+

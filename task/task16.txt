@@ -1,0 +1,4 @@
+NAME                      ADDRESSTYPE   PORTS   ENDPOINTS                                 AGE
+flask-app-mmrd2           IPv4          5000    10.233.65.125                             14h
+frontend-app-kjm9w        IPv4          80      10.233.65.108                             14h
+my-app-12-service-n5pt6   IPv4          80      10.233.66.153,10.233.64.82,10.233.68.52   18m
